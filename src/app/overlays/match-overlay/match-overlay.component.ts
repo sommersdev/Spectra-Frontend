@@ -15,6 +15,7 @@ import { EndroundBannerComponent } from "../../components/combat/endround-banner
 import { TimeoutComponent } from "../../components/common/timeout/timeout.component";
 import { TopBackgroundComponent } from "../../components/top/match/background/background.component";
 import { OneVersusOneComponent } from "../../components/combat/1v1/1v1.component";
+import { ToastComponent } from "../../components/shopping/toast/toast-component";
 
 @Component({
   selector: "app-match-overlay",
@@ -34,6 +35,7 @@ import { OneVersusOneComponent } from "../../components/combat/1v1/1v1.component
     TimeoutComponent,
     TopBackgroundComponent,
     OneVersusOneComponent,
+    ToastComponent,
   ],
   templateUrl: "./match-overlay.component.html",
   styleUrl: "./match-overlay.component.css",

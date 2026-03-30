@@ -106,6 +106,7 @@ export class DataModelService {
   public readonly sponsorInfo = computed(() => this.match().tools.sponsorInfo);
   public readonly watermarkInfo = computed(() => this.match().tools.watermarkInfo);
   public readonly tournamentInfo = computed(() => this.match().tools.tournamentInfo);
+  public toastInfo = computed(() => this.match().toastInfo, { equal: () => false });
   public readonly playercamsInfo = computed(() => this.match().tools.playercamsInfo, {
     equal: () => false,
   });
@@ -194,6 +195,14 @@ export const initialMatchData: IMatchData = {
       type: "disabled",
       sponsors: [],
     },
+  },
+  toastInfo: {
+    active: false,
+    duration: 10000,
+    title: "",
+    message: "",
+    eventLogoEnabled: true,
+    selectedTeam: "none",
   },
   timeoutState: {
     techPause: false,

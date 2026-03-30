@@ -106,6 +106,11 @@ const routes: Routes = [
     loadComponent: () =>
       import("./overlays/map-breakdown/map-breakdown").then((m) => m.MapBreakdown),
   },
+  {
+    path: "toast",
+    loadComponent: () =>
+      import("./components/shopping/toast/toast-component").then((m) => m.ToastComponent),
+  },
 ];
 
 @NgModule({

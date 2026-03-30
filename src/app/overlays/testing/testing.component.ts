@@ -11,6 +11,7 @@ import { IMatchData } from "../../services/Types";
 })
 export class TestingComponent implements OnInit {
   dataModel = inject(DataModelService);
+  private toastTimerRef?: ReturnType<typeof setTimeout>;
   match: IMatchData = initialMatchData;
 
   bgCounter = 1;
@@ -98,6 +99,14 @@ export class TestingComponent implements OnInit {
           type: "tournamentInfo",
           sponsors: [],
         },
+      },
+      toastInfo: {
+        active: false,
+        duration: 10000,
+        title: "",
+        message: "",
+        selectedTeam: "none",
+        eventLogoEnabled: false,
       },
       teams: [
         {
@@ -814,5 +823,46 @@ export class TestingComponent implements OnInit {
       ret.timeoutState.timeRemaining = 0;
       return ret;
     });
+  }
+
+  showToast() {
+    const currentlyActive = this.dataModel.match().toastInfo.active;
+
+    if (currentlyActive) {
+      // Deactivate immediately (mimics pressing the hotkey again)
+      clearTimeout(this.toastTimerRef);
+      this.toastTimerRef = undefined;
+      this.dataModel.match.update((v) => {
+        const ret = v;
+        ret.toastInfo.active = false;
+        return ret;
+      });
+    } else {
+      // Activate
+      this.dataModel.match.update((v) => {
+        const ret = v;
+        ret.toastInfo.active = true;
+        ret.toastInfo.title = "Spezial Spectra Developer Announcement";
+        ret.toastInfo.message =
+          "This is a live toast preview with the biggest changes. Thanks for using Spectra!";
+        ret.toastInfo.selectedTeam = "left";
+        ret.toastInfo.duration = null;
+        ret.toastInfo.eventLogoEnabled = true;
+        return ret;
+      });
+
+      const duration = this.dataModel.match().toastInfo.duration;
+      if (duration !== null) {
+        clearTimeout(this.toastTimerRef);
+        this.toastTimerRef = setTimeout(() => {
+          this.dataModel.match.update((v) => {
+            const ret = v;
+            ret.toastInfo.active = false;
+            return ret;
+          });
+          this.toastTimerRef = undefined;
+        }, duration);
+      }
+    }
   }
 }

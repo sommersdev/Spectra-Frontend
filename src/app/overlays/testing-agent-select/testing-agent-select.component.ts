@@ -90,6 +90,14 @@ export class TestingAgentSelectComponent implements OnInit {
           sponsors: [],
         },
       },
+      toastInfo: {
+        active: false,
+        duration: 10000,
+        title: "",
+        message: "",
+        selectedTeam: "none",
+        eventLogoEnabled: false,
+      },
       timeoutState: {
         techPause: false,
         leftTeam: false,

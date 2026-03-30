@@ -14,6 +14,7 @@ export interface IMatchData {
   switchRound: number;
   firstOtRound: number;
   attackersWon: boolean;
+  toastInfo: IToastInfo;
 }
 
 export interface ITeamData {
@@ -82,6 +83,15 @@ export interface ITimeoutState {
   leftTeam: boolean;
   rightTeam: boolean;
   timeRemaining: number;
+}
+
+export interface IToastInfo {
+  active: boolean;
+  title: string;
+  message: string;
+  duration: number | null;
+  eventLogoEnabled: boolean;
+  selectedTeam: "left" | "right" | "none";
 }
 
 //#endregion
